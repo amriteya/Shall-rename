@@ -1,0 +1,24 @@
+#!/bin/bash
+
+source dir-resolver.sh
+
+init(){
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		$DIR/$1
+	elif [["$OSTYPE" == "linux-gnu"]]; then
+		echo "Linux"
+	elif[["$OSTYPE" == "cygwin"]]l then
+		echo "cygwin : linux emulator for win"
+	elif [[ "$OSTYPE" == "msys" ]]; then
+		echo  "mysys : light-weight shell for windows"
+	elif [[ "$OSTYPE" == "win32" ]]; then
+	        echo "Don't think we need it"
+	elif [[ "$OSTYPE" == "freebsd"* ]]; then
+	        echo "BSD"
+	else
+	        echo "No Support"
+
+	fi
+}
+
+init create-cron.sh
