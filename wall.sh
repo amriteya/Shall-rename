@@ -1,6 +1,7 @@
 #!/bin/bash
-curl -O "https://images7.alphacoders.com/418/thumb-1920-418724.jpg"
-mv *.jpg bg/image.jpg
+image_link=$(curl "http://www.nationalgeographic.com/photography/photo-of-the-day/" | grep -w "aemLeadImage" | sed "s/,'aemLeadImage': '//" | sed "s/\/'//")
+wget -A.jpg $image_link
+mv *.tmp bg/image.jpg
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	echo "MAC"
