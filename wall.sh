@@ -1,4 +1,6 @@
 #!/bin/bash
+curl -O "https://images7.alphacoders.com/418/thumb-1920-418724.jpg"
+mv *.jpg bg/image.jpg
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	echo "MAC"
@@ -7,7 +9,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	if [ $script_dir == '.' ]; then
 		script_dir="$current_dir"
 	fi
-	img_dir="${script_dir}/bg/2.jpg"
+	img_dir="${script_dir}/bg/image.jpg"
 	osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'$img_dir'"'
 elif [["$OSTYPE" == "linux-gnu"]]; then
 	echo "Linux"
