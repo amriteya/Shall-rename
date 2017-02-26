@@ -1,13 +1,17 @@
 #!/bin/bash
 
-source dir-resolver.sh
+CURRENT_DIR=$(pwd)
+DIR=$(dirname $0)
+if [ $DIR == '.' ]; then
+	DIR="$CURRENT_DIR"
+fi
 
 init(){
 	if [[ "$OSTYPE" == "darwin"* ]]; then
 		cat /dev/null > "${DIR}/log"
-		$DIR/$1
+		return;
 	elif [["$OSTYPE" == "linux-gnu"]]; then
-		echo "Linux"
+		echo "Linux";
 	elif[["$OSTYPE" == "cygwin"]]l then
 		echo "cygwin : linux emulator for win"
 	elif [[ "$OSTYPE" == "msys" ]]; then
@@ -33,14 +37,16 @@ function usage()
     echo ""; 1>&2; exit 1;
 }
 
+init
+
 while getopts ":hsd" o; do
     case "${o}" in
         s)
-            init create-cron.sh
+            (crontab -l ; echo "* * * * * $DIR/switcher.sh >> $DIR/log 2>&1") | crontab -
             exit 1;
             ;;
         d)
-            init delete-cron.sh
+            crontab -l | grep -v "$DIR/switcher.sh >> $DIR/log 2>&1"  | crontab  -
             exit 1;
             ;;
         h | *)
