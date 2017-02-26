@@ -4,6 +4,7 @@ source dir-resolver.sh
 
 init(){
 	if [[ "$OSTYPE" == "darwin"* ]]; then
+		cat /dev/null > "${DIR}/log"
 		$DIR/$1
 	elif [["$OSTYPE" == "linux-gnu"]]; then
 		echo "Linux"
