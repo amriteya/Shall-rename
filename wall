@@ -22,4 +22,35 @@ init(){
 	fi
 }
 
-init create-cron.sh
+
+function usage()
+{
+    echo "Change your wallpaper dynamically to the Photo of the day of Nat Geo."
+    echo ""
+    echo "Arguments"
+    echo " -s : Initialize automation of wallpaper"
+    echo " -d : Stop|Delete automation of wallpaper"
+    echo ""; 1>&2; exit 1;
+}
+
+while getopts ":hsd" o; do
+    case "${o}" in
+        s)
+            init create-cron.sh
+            exit 1;
+            ;;
+        d)
+            init delete-cron.sh
+            exit 1;
+            ;;
+        h | *)
+            usage
+            exit 1;
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ -z "${s}" ] || [ -z "${p}" ]; then
+    usage
+fi
