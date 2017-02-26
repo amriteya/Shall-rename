@@ -11,17 +11,22 @@ init(){
 		cat /dev/null > "${DIR}/log"
 		return;
 	elif [["$OSTYPE" == "linux-gnu"]]; then
-		echo "Linux";
+		echo "Linux"; exit 1;
 	elif[["$OSTYPE" == "cygwin"]]l then
 		echo "cygwin : linux emulator for win"
+		exit 1;
 	elif [[ "$OSTYPE" == "msys" ]]; then
 		echo  "mysys : light-weight shell for windows"
+		exit 1;
 	elif [[ "$OSTYPE" == "win32" ]]; then
 	        echo "Don't think we need it"
+	        exit 1;
 	elif [[ "$OSTYPE" == "freebsd"* ]]; then
 	        echo "BSD"
+	        exit 1;
 	else
 	        echo "No Support"
+	        exit 1;
 
 	fi
 }
